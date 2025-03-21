@@ -1,0 +1,9 @@
+./_pycache_
+./.vscode
+./myenv
+./scowl-2020.12.07
+download_kaggle.py
+symspell
+tempCodeRunnerFile.cpp
+tempCodeRunnerFile.py
+words.txt
