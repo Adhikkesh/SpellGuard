@@ -1,0 +1,16 @@
+services:
+  symspellchecker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/dri:/dev/dri
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - QTWEBENGINE_DISABLE_SANDBOX=1  # Disable sandbox
+    devices:
+      - /dev/dri:/dev/dri
+    network_mode: host
+    command: ["./SymSpellChecker", "words_alpha.txt", "english_word_frequency.csv"]

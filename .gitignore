@@ -1,9 +1,16 @@
-./_pycache_
-./.vscode
-./myenv
-./scowl-2020.12.07
-download_kaggle.py
-symspell
-tempCodeRunnerFile.cpp
-tempCodeRunnerFile.py
+# Build artifacts
+Makefile
+*.o
+*.moc
+moc_*
+qrc_*
+SymSpellChecker
+.qmake.stash
+
+# Temporary files
+tempCodeRunnerFile.sh
+sample.sh
+
+# Possibly unused files
 words.txt
+.pro
