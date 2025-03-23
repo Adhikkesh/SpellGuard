@@ -1,21 +1,15 @@
-```markdown
 # SymSpellChecker
 
 SymSpellChecker is a lightweight spell-checking application powered by the SymSpell algorithm and Trie data structure. The project features a GUI built with Qt and is fully containerized using Docker.
 
 ## Requirements (Ubuntu)
 
-- **Docker & Docker Compose**:
-  ```bash
-  sudo apt install -y docker.io docker-compose
-  sudo usermod -aG docker $USER
-  ```
-  _(Log out and log back in for permissions to apply)_
+- Docker & Docker Compose:
+  - sudo apt install -y docker.io docker-compose
+  - sudo usermod -aG docker $USER
 
-- **X11 Display (for GUI support)**:
-  ```bash
-  sudo apt install -y xorg mesa-utils
-  ```
+- X11 Display (for GUI support):
+  - sudo apt install -y xorg mesa-utils
 
 ## Getting Started
 
