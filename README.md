@@ -34,7 +34,7 @@ SymSpellChecker is a lightweight spell-checking application powered by the SymSp
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<username>/SymSpellChecker.git
+git clone https://github.com/Adhikkesh/SymSpellChecker.git
 cd SymSpellChecker
 ```
 
