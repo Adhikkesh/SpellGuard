@@ -2,14 +2,33 @@
 
 SymSpellChecker is a lightweight spell-checking application powered by the SymSpell algorithm and Trie data structure. The project features a GUI built with Qt and is fully containerized using Docker.
 
-## Requirements (Ubuntu)
+---
 
+## Requirements
+
+### Ubuntu:
 - Docker & Docker Compose:
-  - sudo apt install -y docker.io docker-compose
-  - sudo usermod -aG docker $USER
+  ```bash
+  sudo apt install -y docker.io docker-compose
+  sudo usermod -aG docker $USER
+  ```
 
 - X11 Display (for GUI support):
-  - sudo apt install -y xorg mesa-utils
+  ```bash
+  sudo apt install -y xorg mesa-utils
+  ```
+
+### Windows (WSL2 + Docker Desktop + X Server):
+- **WSL2** (Ubuntu 20.04/22.04 recommended):  
+  [Install instructions](https://learn.microsoft.com/en-us/windows/wsl/install)
+
+- **Docker Desktop** with WSL2 integration enabled:  
+  [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
+
+- **X Server for Windows** (for GUI apps inside WSL2):  
+  - Recommended: [VcXsrv](https://sourceforge.net/projects/vcxsrv/) or [Xming](https://sourceforge.net/projects/xming/)
+
+---
 
 ## Getting Started
 
@@ -20,21 +39,37 @@ cd SymSpellChecker
 ```
 
 ### 2. Enable Docker GUI Access
+
+#### On Ubuntu:
 ```bash
 xhost +local:docker
 ```
 
-### 3. Build & Launch
+#### On Windows (WSL2):
+- Start **VcXsrv** or **Xming**.
+- Inside WSL2 terminal, set the display:
+  ```bash
+  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+  export LIBGL_ALWAYS_INDIRECT=1
+  ```
+
+> Tip: You can add these export lines to your `~/.bashrc` or `~/.zshrc` to make them permanent.
+
+### 3. Build & Launch the App (Both Ubuntu & Windows)
+
 ```bash
 docker-compose up --build
 ```
+
 - The app will load a dictionary (~370k words) and word frequency list (~333k entries) before launching the GUI.
 
 ### 4. Shut down
-Press `Ctrl+C` to stop, and:
+Press `Ctrl+C` to stop, and then:
 ```bash
 docker-compose down
 ```
+
+---
 
 ## Project Structure
 
@@ -47,22 +82,26 @@ docker-compose down
 - `docker-compose.yml`: Docker orchestration
 - `.gitignore`: Ignores generated build files
 
+---
+
 ## Common Issues
 
 - **No GUI appears**:
-  - Ensure `xhost +local:docker` was run.
-  - Verify `$DISPLAY` is set (`echo $DISPLAY` should output `:0`).
+  - Ensure you started `xhost +local:docker` (Ubuntu) or your X server (Windows).
+  - Confirm `$DISPLAY` is correctly set.
 
 - **OpenGL errors**:
-  - Ensure you have `mesa-utils` and GPU drivers installed.
-  - Check `/dev/dri/` for `card0`.
+  - Ensure `mesa-utils` (Ubuntu) is installed and GPU drivers are present.
+  - On Windows, make sure `VcXsrv/Xming` is running with OpenGL option enabled.
 
 - **Permission denied (Docker)**:
   ```bash
   sudo docker-compose up --build
   ```
 
+---
+
 ## Notes
-- This setup is tested on Ubuntu 22.04.
-- C++11 and Qt 5.15 used for development.
-- Works best on native Linux. WSL2/macOS may need additional X server setup (e.g., VcXsrv or XQuartz).
+- Tested on Ubuntu 22.04 and Windows 11 (WSL2).
+- Uses C++11 and Qt 5.15.
+- On macOS, use Docker Desktop + XQuartz with similar X11 setup.
